@@ -7,7 +7,7 @@ const products = [
   {
     id: 'pandereta',
     name: 'Pandereta rayas',
-    image: '/images/pandereta.jpg',
+    image: '/images/pandereta.png',
     description: 'Ideal para muros divisorios no portantes y tabiquería. Ofrece excelente aislamiento acústico y térmico.',
     features: [
       'Medidas: 10 x 12 x 25 cm',
@@ -25,7 +25,7 @@ const products = [
   {
     id: 'techo',
     name: 'Techo 12',
-    image: '/images/techo12.jpg',
+    image: '/images/techo12.png',
     description: 'Diseñado específicamente para losas aligeradas. Optimiza el peso de la estructura manteniendo la resistencia necesaria.',
     features: [
       'Medidas: 30 x 30 x 12 cm',
@@ -43,7 +43,7 @@ const products = [
   {
     id: 'king-kong',
     name: 'King Kong 18 huecos',
-    image: '/images/king-kong.jpg',
+    image: '/images/kingkong.png',
     description: 'Perfecto para muros portantes. Proporciona alta resistencia sísmica y durabilidad para construcciones seguras.',
     features: [
       'Medidas: 9 x 13 x 24 cm',
@@ -62,7 +62,7 @@ const products = [
   {
     id: 'segunda',
     name: 'Ladrillos de segunda',
-    image: '/images/segunda.jpg',
+    image: '/images/pandereta.png',
     description: 'Ladrillos que presentan pequeñas imperfecciones estéticas o rajaduras menores pero que mantienen sus propiedades estructurales. Ideales para construcciones económicas.',
     features: [
       'Mismas dimensiones que los productos estándar',
@@ -86,7 +86,7 @@ export default function ProductosPage() {
       <section className="relative h-[40vh] min-h-[300px] flex items-center">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/productos-hero.jpg"
+            src="/images/slider2.png"
             alt="Productos de Cerámicos Alva"
             fill
             priority
@@ -284,7 +284,7 @@ export default function ProductosPage() {
               <Button color="secondary" size="lg">
                 <Link href="/contacto">Contáctanos</Link>
               </Button>
-              <Button variant="outline" size="lg">
+              <Button variant="outline" color="secondary" size="lg">
                 <Link href="/cotizacion">Solicitar cotización</Link>
               </Button>
             </div>

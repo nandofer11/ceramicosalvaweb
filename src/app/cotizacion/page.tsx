@@ -11,7 +11,7 @@ export default function CotizacionPage() {
       <section className="relative h-[40vh] min-h-[300px] flex items-center">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/cotizacion-hero.jpg"
+            src="/images/fachada.jpg"
             alt="Solicitar cotización - Cerámicos Alva"
             fill
             priority
@@ -392,7 +392,7 @@ export default function CotizacionPage() {
 
               {/* Información de Contacto Directo */}
               <div className="bg-primary/10 p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold mb-4 text-foreground">Contacto Directo</h3>
+                <h3 className="text-xl font-semibold mb-4 text-gray-dark">Contacto Directo</h3>
                 <p className="text-gray-dark mb-4">
                   Si prefiere una atención más personalizada, puede contactarnos directamente a través de:
                 </p>
@@ -401,14 +401,14 @@ export default function CotizacionPage() {
                     <svg className="h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
-                    <span className="text-foreground font-medium">951 875 432</span>
+                    <span className="text-gray-dark font-medium">951 875 432</span>
                   </div>
                   <div className="flex items-start">
                     <svg className="h-5 w-5 text-primary flex-shrink-0 mt-0.5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
-                    <a href="mailto:ventas@ceramicosalva.com" className="text-foreground font-medium hover:text-primary">
-                      ventas@ceramicosalva.com
+                    <a href="mailto:ventas@ceramicosalva.com" className="text-gray-dark font-medium hover:text-primary">
+                    ceramicosalva@gmail.com
                     </a>
                   </div>
                   <div className="flex items-start">
@@ -416,7 +416,7 @@ export default function CotizacionPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    <span className="text-foreground font-medium">
+                    <span className="text-gray-dark font-medium">
                       Carrt. Fernando Belaunde T. Km. 08, <br />Caserío "Las Delicias", <br />Rioja - San Martín
                     </span>
                   </div>
@@ -468,39 +468,6 @@ export default function CotizacionPage() {
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md flex items-center justify-center h-32">
               <span className="text-lg font-bold text-gray-dark">Grupo Constructor Amazonas</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Política de Precios */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-foreground mb-6 text-center">Nuestra Política de Precios</h2>
-            <div className="bg-gray-light p-8 rounded-lg shadow-md">
-              <div className="prose prose-lg max-w-none text-gray-dark">
-                <p>
-                  En Cerámicos Alva, nos esforzamos por ofrecer precios justos y competitivos, manteniendo siempre la más alta calidad en nuestros productos. Nuestros precios se establecen teniendo en cuenta diversos factores:
-                </p>
-                <ul className="space-y-2 mt-4">
-                  <li>
-                    <span className="font-medium text-foreground">Calidad premium:</span> Utilizamos materias primas seleccionadas y procesos de producción optimizados.
-                  </li>
-                  <li>
-                    <span className="font-medium text-foreground">Volumen de pedido:</span> Ofrecemos descuentos progresivos según la cantidad solicitada.
-                  </li>
-                  <li>
-                    <span className="font-medium text-foreground">Servicios adicionales:</span> El transporte y la descarga tienen tarifas especiales según la distancia y accesibilidad.
-                  </li>
-                  <li>
-                    <span className="font-medium text-foreground">Tipo de cliente:</span> Contamos con precios especiales para constructoras, distribuidores y proyectos gubernamentales.
-                  </li>
-                </ul>
-                <p className="mt-4">
-                  Cada cotización es personalizada para satisfacer las necesidades específicas de su proyecto, garantizando siempre la mejor relación calidad-precio del mercado.
-                </p>
-              </div>
             </div>
           </div>
         </div>

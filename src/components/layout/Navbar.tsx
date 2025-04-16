@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Button from '../ui/Button';
+import Image from "next/image";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,16 +34,16 @@ const Navbar = () => {
     { name: 'Empresa', path: '/empresa' },
     { name: 'Productos', path: '/productos' },
     { name: 'Contacto', path: '/contacto' },
-    { name: 'Cotización', path: '/cotizacion' },
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-background/90 backdrop-blur-md shadow-md' : 'bg-transparent'}`}>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-md' : 'bg-white'}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <span className="text-xl md:text-2xl font-bold text-primary">Cerámicos Alva</span>
+            {/* <span className="text-xl md:text-2xl font-bold text-primary">Cerámicos Alva</span> */}
+            <Image src="/images/logo_color.png" alt="Cerámicos Alva" width={120} height={120} />
           </Link>
 
           {/* Desktop Menu */}
@@ -55,7 +56,7 @@ const Navbar = () => {
                   group
                   ${pathname === item.path 
                     ? 'text-primary font-semibold' 
-                    : 'text-foreground hover:text-primary-dark'
+                    : 'text-secondary hover:text-primary-dark'
                   }`}
               >
                 {item.name}

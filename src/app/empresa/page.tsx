@@ -8,7 +8,7 @@ export default function EmpresaPage() {
       <section className="relative h-[40vh] min-h-[300px] flex items-center">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/empresa-hero.jpg"
+            src="/images/hero-background.jpg"
             alt="Fábrica de Cerámicos Alva"
             fill
             priority
@@ -31,20 +31,20 @@ export default function EmpresaPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold text-foreground mb-6">Quiénes Somos</h2>
+              <h2 className="text-3xl font-bold text-gray-dark mb-6">Quiénes Somos</h2>
               <p className="text-gray-dark mb-4">
-                <span className="font-semibold text-foreground">Cerámicos Alva EIRL</span> es una empresa riojana dedicada a la fabricación y venta de ladrillos de arcilla, comprometida con ofrecer productos de calidad para el sector construcción en la región San Martín.
+                <span className="font-semibold text-primary">Cerámicos Alva EIRL</span> es una empresa riojana dedicada a la fabricación y venta de ladrillos de arcilla, comprometida con ofrecer productos de calidad para el sector construcción en la región San Martín.
               </p>
               <p className="text-gray-dark mb-4">
-                Fundada en el año 2008, hemos crecido constantemente gracias a la confianza de nuestros clientes y a la calidad de nuestros productos. Nuestra planta de producción está ubicada en el Caserío "Las Delicias", en el kilómetro 8 de la Carretera Fernando Belaunde Terry, en Rioja, San Martín.
+                Inscrita en el año 2010, hemos crecido constantemente gracias a la confianza de nuestros clientes y a la calidad de nuestros productos. Nuestra planta de producción está ubicada en el Caserío "Las Delicias", en el kilómetro 8 de la Carretera Fernando Belaunde Terry, en Rioja, San Martín.
               </p>
               <p className="text-gray-dark">
-                Contamos con tecnología adecuada y personal capacitado para garantizar la producción de ladrillos que cumplen con los estándares de calidad exigidos por la industria de la construcción.
+                Contamos con maquinaria adecuada y personal capacitado para garantizar la producción de ladrillos que cumplen con la calidad exigida por la industria de la construcción.
               </p>
             </div>
             <div className="relative h-[400px] rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="/images/empresa-quienes-somos.jpg"
+                src="/images/foto_historia.jpg"
                 alt="Instalaciones de Cerámicos Alva"
                 fill
                 className="object-cover object-center"
@@ -92,7 +92,7 @@ export default function EmpresaPage() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Nuestros Valores</h2>
+            <h2 className="text-3xl font-bold text-gray-dark mb-4">Nuestros Valores</h2>
             <p className="text-lg text-gray-dark max-w-3xl mx-auto">
               En Cerámicos Alva nos guiamos por valores fundamentales que definen nuestra cultura organizacional y nuestra forma de trabajar.
             </p>
@@ -149,182 +149,6 @@ export default function EmpresaPage() {
               <p className="text-gray-dark">
                 Buscamos implementar prácticas sostenibles en nuestros procesos para minimizar el impacto ambiental y contribuir a la conservación de los recursos naturales.
               </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Historia */}
-      <section className="py-16 bg-gray-light">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-foreground mb-12 text-center">Nuestra Historia</h2>
-          
-          <div className="relative">
-            {/* Línea de tiempo vertical */}
-            <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-primary"></div>
-            
-            <div className="space-y-12">
-              {/* Evento 1 */}
-              <div className="flex flex-col md:flex-row items-center">
-                <div className="flex-1 md:text-right md:pr-12 mb-4 md:mb-0">
-                  <h3 className="text-xl font-semibold text-foreground mb-2">2008</h3>
-                  <p className="text-gray-dark">
-                    Fundación de Cerámicos Alva como un pequeño emprendimiento familiar en Rioja, San Martín.
-                  </p>
-                </div>
-                <div className="relative hidden md:block z-10 w-10 h-10 rounded-full bg-primary border-4 border-white flex items-center justify-center">
-                  <span className="text-white font-bold">1</span>
-                </div>
-                <div className="flex-1 md:pl-12 md:text-left">
-                  <div className="bg-white p-4 rounded-lg shadow-md md:invisible md:h-0 md:p-0 md:shadow-none">
-                    <h3 className="text-xl font-semibold text-foreground mb-2 md:hidden">2008</h3>
-                    <div className="aspect-w-16 aspect-h-9 md:hidden">
-                      <Image 
-                        src="/images/historia-2008.jpg"
-                        alt="Fundación de Cerámicos Alva en 2008"
-                        width={300}
-                        height={200}
-                        className="rounded-lg object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Evento 2 */}
-              <div className="flex flex-col md:flex-row items-center">
-                <div className="flex-1 md:text-right md:pr-12 md:invisible md:h-0">
-                  <div className="bg-white p-4 rounded-lg shadow-md md:p-0 md:shadow-none">
-                    <h3 className="text-xl font-semibold text-foreground mb-2 md:hidden">2012</h3>
-                    <div className="aspect-w-16 aspect-h-9 md:hidden">
-                      <Image 
-                        src="/images/historia-2012.jpg"
-                        alt="Expansión de planta en 2012"
-                        width={300}
-                        height={200}
-                        className="rounded-lg object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="relative hidden md:block z-10 w-10 h-10 rounded-full bg-primary border-4 border-white flex items-center justify-center">
-                  <span className="text-white font-bold">2</span>
-                </div>
-                <div className="flex-1 md:pl-12 md:text-left">
-                  <h3 className="text-xl font-semibold text-foreground mb-2">2012</h3>
-                  <p className="text-gray-dark">
-                    Expansión de la planta de producción y adquisición de nueva maquinaria para aumentar la capacidad productiva.
-                  </p>
-                </div>
-              </div>
-
-              {/* Evento 3 */}
-              <div className="flex flex-col md:flex-row items-center">
-                <div className="flex-1 md:text-right md:pr-12 mb-4 md:mb-0">
-                  <h3 className="text-xl font-semibold text-foreground mb-2">2015</h3>
-                  <p className="text-gray-dark">
-                    Incorporación de nuevos productos a nuestra línea de producción, incluyendo el King Kong 18 huecos.
-                  </p>
-                </div>
-                <div className="relative hidden md:block z-10 w-10 h-10 rounded-full bg-primary border-4 border-white flex items-center justify-center">
-                  <span className="text-white font-bold">3</span>
-                </div>
-                <div className="flex-1 md:pl-12 md:text-left">
-                  <div className="bg-white p-4 rounded-lg shadow-md md:invisible md:h-0 md:p-0 md:shadow-none">
-                    <h3 className="text-xl font-semibold text-foreground mb-2 md:hidden">2015</h3>
-                    <div className="aspect-w-16 aspect-h-9 md:hidden">
-                      <Image 
-                        src="/images/historia-2015.jpg"
-                        alt="Nuevos productos en 2015"
-                        width={300}
-                        height={200}
-                        className="rounded-lg object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Evento 4 */}
-              <div className="flex flex-col md:flex-row items-center">
-                <div className="flex-1 md:text-right md:pr-12 md:invisible md:h-0">
-                  <div className="bg-white p-4 rounded-lg shadow-md md:p-0 md:shadow-none">
-                    <h3 className="text-xl font-semibold text-foreground mb-2 md:hidden">2019</h3>
-                    <div className="aspect-w-16 aspect-h-9 md:hidden">
-                      <Image 
-                        src="/images/historia-2019.jpg"
-                        alt="Servicio de transporte en 2019"
-                        width={300}
-                        height={200}
-                        className="rounded-lg object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="relative hidden md:block z-10 w-10 h-10 rounded-full bg-primary border-4 border-white flex items-center justify-center">
-                  <span className="text-white font-bold">4</span>
-                </div>
-                <div className="flex-1 md:pl-12 md:text-left">
-                  <h3 className="text-xl font-semibold text-foreground mb-2">2019</h3>
-                  <p className="text-gray-dark">
-                    Implementación del servicio de transporte y descarga para ofrecer una solución integral a nuestros clientes.
-                  </p>
-                </div>
-              </div>
-
-              {/* Evento 5 */}
-              <div className="flex flex-col md:flex-row items-center">
-                <div className="flex-1 md:text-right md:pr-12 mb-4 md:mb-0">
-                  <h3 className="text-xl font-semibold text-foreground mb-2">2023</h3>
-                  <p className="text-gray-dark">
-                    Ampliación de las zonas de cobertura para atender a más ciudades de la región San Martín.
-                  </p>
-                </div>
-                <div className="relative hidden md:block z-10 w-10 h-10 rounded-full bg-primary border-4 border-white flex items-center justify-center">
-                  <span className="text-white font-bold">5</span>
-                </div>
-                <div className="flex-1 md:pl-12 md:text-left">
-                  <div className="bg-white p-4 rounded-lg shadow-md md:invisible md:h-0 md:p-0 md:shadow-none">
-                    <h3 className="text-xl font-semibold text-foreground mb-2 md:hidden">2023</h3>
-                    <div className="aspect-w-16 aspect-h-9 md:hidden">
-                      <Image 
-                        src="/images/historia-2023.jpg"
-                        alt="Ampliación de cobertura en 2023"
-                        width={300}
-                        height={200}
-                        className="rounded-lg object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Evento Actual */}
-              <div className="flex flex-col md:flex-row items-center">
-                <div className="flex-1 md:text-right md:pr-12 md:invisible md:h-0">
-                  <div className="bg-white p-4 rounded-lg shadow-md md:p-0 md:shadow-none">
-                    <h3 className="text-xl font-semibold text-foreground mb-2 md:hidden">Hoy</h3>
-                    <div className="aspect-w-16 aspect-h-9 md:hidden">
-                      <Image 
-                        src="/images/historia-hoy.jpg"
-                        alt="Cerámicos Alva hoy"
-                        width={300}
-                        height={200}
-                        className="rounded-lg object-cover"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="relative hidden md:block z-10 w-10 h-10 rounded-full bg-secondary border-4 border-white flex items-center justify-center">
-                  <span className="text-white font-bold">!</span>
-                </div>
-                <div className="flex-1 md:pl-12 md:text-left">
-                  <h3 className="text-xl font-semibold text-foreground mb-2">Hoy</h3>
-                  <p className="text-gray-dark">
-                    Seguimos creciendo y mejorando continuamente para ofrecer los mejores productos y servicios a nuestros clientes en toda la región.
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
