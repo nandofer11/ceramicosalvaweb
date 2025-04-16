@@ -36,6 +36,11 @@ export const metadata: Metadata = {
     title: "Cerámicos Alva | Fabricación y venta de ladrillos de arcilla",
     description: "Empresa Riojana dedicada a la fabricación y venta de ladrillos de arcilla de alta calidad para el sector construcción.",
   },
+  icons: {
+    icon: '/images/favicon.png',
+    shortcut: '/images/favicon.png',
+    apple: '/images/favicon.png',
+  },
 };
 
 export default function RootLayout({
