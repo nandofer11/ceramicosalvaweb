@@ -1,103 +1,260 @@
 import Image from "next/image";
+import Link from "next/link";
+import MainLayout from "@/components/layout/MainLayout";
+import Button from "@/components/ui/Button";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <MainLayout>
+      {/* Hero Section */}
+      <section className="relative h-screen min-h-[600px] flex items-center">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero-background.jpg" 
+            alt="Fábrica de ladrillos Cerámicos Alva"
+            fill
+            priority
+            className="object-cover object-center"
+            style={{ 
+              filter: "brightness(0.7)" 
+            }}
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        {/* Content */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-3xl">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+              Construyendo el futuro de San Martín con calidad
+            </h1>
+            <p className="text-lg md:text-xl text-white/90 mb-8">
+              Cerámicos Alva, empresa líder en la fabricación y venta de ladrillos de arcilla de alta calidad en la región San Martín.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Button size="lg">
+                <Link href="/productos">Ver productos</Link>
+              </Button>
+              <Button variant="outline" color="secondary" size="lg">
+                <Link href="/cotizacion">Solicitar cotización</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Productos Destacados */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground mb-4">Nuestros Productos Destacados</h2>
+            <p className="text-lg text-gray-dark max-w-3xl mx-auto">
+              Ofrecemos ladrillos de arcilla de alta calidad para tus proyectos de construcción.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Producto 1 */}
+            <div className="bg-gray-light rounded-lg overflow-hidden shadow-md transition-transform hover:shadow-lg hover:-translate-y-1">
+              <div className="relative h-64">
+                <Image 
+                  src="/images/pandereta.jpg"
+                  alt="Ladrillo Pandereta rayas"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-2">Pandereta rayas</h3>
+                <p className="text-gray-dark mb-4">
+                  Ideal para muros divisorios o tabiquería. Ofrece excelente aislamiento acústico y térmico.
+                </p>
+                <Link 
+                  href="/productos#pandereta" 
+                  className="text-primary hover:text-primary-dark font-medium inline-flex items-center"
+                >
+                  Ver detalles
+                  <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+
+            {/* Producto 2 */}
+            <div className="bg-gray-light rounded-lg overflow-hidden shadow-md transition-transform hover:shadow-lg hover:-translate-y-1">
+              <div className="relative h-64">
+                <Image 
+                  src="/images/techo12.jpg"
+                  alt="Ladrillo Techo 12"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-2">Techo 12</h3>
+                <p className="text-gray-dark mb-4">
+                  Diseñado específicamente para losas aligeradas. Ofrece alta resistencia y menor peso en la estructura.
+                </p>
+                <Link 
+                  href="/productos#techo" 
+                  className="text-primary hover:text-primary-dark font-medium inline-flex items-center"
+                >
+                  Ver detalles
+                  <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+
+            {/* Producto 3 */}
+            <div className="bg-gray-light rounded-lg overflow-hidden shadow-md transition-transform hover:shadow-lg hover:-translate-y-1">
+              <div className="relative h-64">
+                <Image 
+                  src="/images/king-kong.jpg"
+                  alt="Ladrillo King Kong 18 huecos"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-2">King Kong 18 huecos</h3>
+                <p className="text-gray-dark mb-4">
+                  Perfecto para muros portantes. Alta resistencia sísmica y durabilidad para construcciones seguras.
+                </p>
+                <Link 
+                  href="/productos#king-kong" 
+                  className="text-primary hover:text-primary-dark font-medium inline-flex items-center"
+                >
+                  Ver detalles
+                  <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-12">
+            <Button>
+              <Link href="/productos">Ver todos los productos</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Por qué elegirnos */}
+      <section className="py-16 bg-gray-light">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground mb-4">¿Por qué elegir Cerámicos Alva?</h2>
+            <p className="text-lg text-gray-dark max-w-3xl mx-auto">
+              Somos una empresa comprometida con la calidad y satisfacción de nuestros clientes
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Razón 1 */}
+            <div className="bg-white p-6 rounded-lg shadow-md text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Calidad garantizada</h3>
+              <p className="text-gray-dark">
+                Nuestros productos cumplen con los más altos estándares de calidad y durabilidad.
+              </p>
+            </div>
+
+            {/* Razón 2 */}
+            <div className="bg-white p-6 rounded-lg shadow-md text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Entrega puntual</h3>
+              <p className="text-gray-dark">
+                Respetamos los plazos de entrega para que tu proyecto avance sin retrasos.
+              </p>
+            </div>
+
+            {/* Razón 3 */}
+            <div className="bg-white p-6 rounded-lg shadow-md text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Experiencia regional</h3>
+              <p className="text-gray-dark">
+                Más de 15 años construyendo junto a las principales ciudades de la región San Martín.
+              </p>
+            </div>
+
+            {/* Razón 4 */}
+            <div className="bg-white p-6 rounded-lg shadow-md text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Servicios integrales</h3>
+              <p className="text-gray-dark">
+                Ofrecemos transporte y descarga directamente en el lugar de tu obra.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Llamado a la acción */}
+      <section className="py-16 bg-primary text-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-4">¿Listo para comenzar tu proyecto?</h2>
+            <p className="text-lg mb-8">
+              Nuestro equipo está preparado para asesorarte y ofrecerte los mejores productos para tu construcción.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Button color="secondary" size="lg">
+                <Link href="/contacto">Contáctanos</Link>
+              </Button>
+              <Button variant="outline" size="lg">
+                <Link href="/cotizacion">Solicitar cotización</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Zonas de cobertura */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground mb-4">Zonas de Cobertura</h2>
+            <p className="text-lg text-gray-dark max-w-3xl mx-auto">
+              Atendemos a las principales ciudades de la región San Martín
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {['Rioja', 'Moyobamba', 'Nueva Cajamarca', 'Soritor', 'Tarapoto', 'Juanjuí'].map((city) => (
+              <div key={city} className="bg-gray-light p-4 rounded-lg text-center">
+                <span className="text-lg font-medium">{city}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 text-center">
+            <p className="text-gray-dark">
+              ¿Necesitas entrega en otra localidad? <Link href="/contacto" className="text-primary hover:text-primary-dark">Contáctanos</Link> para consultar disponibilidad.
+            </p>
+          </div>
+        </div>
+      </section>
+    </MainLayout>
   );
 }
