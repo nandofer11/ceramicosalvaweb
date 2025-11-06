@@ -7,62 +7,61 @@ const Footer = () => {
   return (
     <footer className="bg-secondary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {/* Column 1: Company Info */}
-          <div className="space-y-4 text-white">
+          <div className="space-y-3 text-white text-center sm:text-left">
             <Link href="/" className="inline-block">
-              {/* <span className="text-xl font-bold text-primary">Cerámicos Alva</span> */}
-              <Image src="/images/logo_white.png" alt="Cerámicos Alva" width={120} height={120} />
+              <Image src="/images/logo_white.png" alt="Cerámicos Alva" width={100} height={100} />
             </Link>
-            <p className="text-sm">
+            <p className="text-sm text-white">
               Empresa Riojana dedicada a la fabricación y venta de ladrillos de arcilla quemada.
             </p>
-            <div className="pt-2">
-              <p className="text-sm">
+            <div className="pt-1">
+              <p className="text-sm text-white">
                 RUC: 20493861922
               </p>
             </div>
           </div>
 
           {/* Column 2: Quick Links */}
-          <div>
-            <h3 className="text-white font-bold mb-4">Menu</h3>
+          <div className="text-center sm:text-left">
+            <h3 className="text-white font-bold mb-3">Menu</h3>
             <ul className="space-y-2 text-white">
               <li>
-                <Link 
-                  href="/" 
+                <Link
+                  href="/"
                   className="text-sm hover:text-primary transition-colors"
                 >
                   Inicio
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/empresa" 
+                <Link
+                  href="/empresa"
                   className="text-sm hover:text-primary transition-colors"
                 >
                   Nuestra Empresa
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/productos" 
+                <Link
+                  href="/productos"
                   className="text-sm hover:text-primary transition-colors"
                 >
                   Productos
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/contacto" 
+                <Link
+                  href="/contacto"
                   className="text-sm hover:text-primary transition-colors"
                 >
                   Contacto
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/cotizacion" 
+                <Link
+                  href="/cotizacion"
                   className="text-sm hover:text-primary transition-colors"
                 >
                   Solicitar cotización
@@ -72,36 +71,36 @@ const Footer = () => {
           </div>
 
           {/* Column 3: Products */}
-          <div>
-            <h3 className="text-base font-bold mb-4 ">Productos</h3>
-            <ul className="space-y-2">
+          <div className='text-center sm:text-left'>
+            <h3 className="text-white font-bold mb-3">Productos</h3>
+            <ul className="space-y-2 text-white">
               <li>
-                <Link 
-                  href="/productos#pandereta" 
+                <Link
+                  href="/productos#pandereta"
                   className="text-sm hover:text-primary transition-colors"
                 >
                   Pandereta rayas
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/productos#techo" 
+                <Link
+                  href="/productos#techo"
                   className="text-sm hover:text-primary transition-colors"
                 >
                   Techo 12
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/productos#king-kong" 
+                <Link
+                  href="/productos#king-kong"
                   className="text-sm hover:text-primary transition-colors"
                 >
                   King Kong 18 huecos
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/productos#segunda" 
+                <Link
+                  href="/productos#segunda"
                   className="text-sm hover:text-primary transition-colors"
                 >
                   Ladrillos de segunda
@@ -111,15 +110,15 @@ const Footer = () => {
           </div>
 
           {/* Column 4: Contact Info */}
-          <div>
-            <h3 className="text-base font-bold text-white mb-4">Contacto</h3>
-            <div className="space-y-3">
+          <div className='text-center sm:text-left'>
+            <h3 className="text-white font-bold mb-3">Contacto</h3>
+            <div className="space-y-3 text-white">
               <p className="text-sm flex items-start">
                 <svg className="h-5 w-5 mr-2 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <span>Carrt. Fernando Belaunde T. Km. 08, Caserío "Las Delicias", Rioja - San Martín</span>
+                <span>Carrt. Fernando Belaunde T. Km. 08, Caserío &ldquo;Las Delicias&rdquo;, Rioja - San Martín</span>
               </p>
               <p className="text-sm flex items-center">
                 <svg className="h-5 w-5 mr-2 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -141,9 +140,9 @@ const Footer = () => {
                 <svg className="h-5 w-5 mr-2 text-primary flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
                 </svg>
-                <a 
-                  href="https://www.facebook.com/CeramicosAlva/" 
-                  target="_blank" 
+                <a
+                  href="https://www.facebook.com/CeramicosAlva/"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-primary transition-colors"
                 >
@@ -155,13 +154,13 @@ const Footer = () => {
         </div>
 
         {/* Bottom Row */}
-        <div className="border-t border-gray-medium mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm">
+        <div className="border-t border-gray-medium mt-8 pt-6 flex flex-col md:flex-row justify-between items-center text-white">
+          <p className="text-sm text-center md:text-left">
             © {currentYear} Cerámicos Alva EIRL. Todos los derechos reservados.
           </p>
-          <div className="mt-4 md:mt-0">
-            <p className="text-sm">
-              Diseñado y desarrollado con 💚 para Cerámicos Alva
+          <div className="mt-2 md:mt-0">
+            <p className="text-sm text-white">
+              Cerámicos Alva 💚
             </p>
           </div>
         </div>
