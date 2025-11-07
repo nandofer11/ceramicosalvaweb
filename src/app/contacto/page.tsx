@@ -7,8 +7,6 @@ import MainLayout from '@/components/layout/MainLayout';
 import Button from '@/components/ui/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import { sendContactForm, sendViaMailto, ContactData } from '@/services/emailService';
-
 export default function ContactoPage() {
   // Variable no utilizada comentada
   // const [activeIndex, setActiveIndex] = useState(0);
@@ -164,19 +162,18 @@ export default function ContactoPage() {
     });
     
     try {
-      // Preparar datos para EmailJS
-      const contactData: ContactData = {
-        nombre: formData.nombre,
-        apellido: formData.apellido,
-        email: formData.email,
-        telefono: formData.telefono,
-        mensaje: formData.mensaje
-      };
+      // Enviar a la API
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-      // Intentar enviar con EmailJS
-      const result = await sendContactForm(contactData);
+      const result = await response.json();
       
-      if (result.success) {
+      if (response.ok && result.success) {
         // Éxito
         setFormStatus({
           isSubmitting: false,
@@ -194,20 +191,13 @@ export default function ContactoPage() {
           mensaje: ''
         });
       } else {
-        // Error con EmailJS, ofrecer alternativa
+        // Error
         setFormStatus({
           isSubmitting: false,
           isSuccess: false,
           isError: true,
-          message: `${result.message} ¿Deseas enviar por email tradicional?`
+          message: result.error || 'Ocurrió un error al enviar el mensaje'
         });
-        
-        // Después de 3 segundos, ofrecer mailto como alternativa
-        setTimeout(() => {
-          if (window.confirm('¿Deseas abrir tu cliente de email para enviar el mensaje?')) {
-            sendViaMailto(contactData, 'contact');
-          }
-        }, 3000);
       }
       
     } catch (error) {
@@ -216,22 +206,8 @@ export default function ContactoPage() {
         isSubmitting: false,
         isSuccess: false,
         isError: true,
-        message: 'Ocurrió un error al enviar el mensaje. ¿Deseas enviar por email tradicional?'
+        message: 'Error de conexión. Por favor, inténtalo de nuevo.'
       });
-      
-      // Ofrecer mailto como alternativa
-      setTimeout(() => {
-        if (window.confirm('¿Deseas abrir tu cliente de email para enviar el mensaje?')) {
-          const contactData: ContactData = {
-            nombre: formData.nombre,
-            apellido: formData.apellido,
-            email: formData.email,
-            telefono: formData.telefono,
-            mensaje: formData.mensaje
-          };
-          sendViaMailto(contactData, 'contact');
-        }
-      }, 3000);
     }
   };
 

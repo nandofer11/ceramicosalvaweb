@@ -6,8 +6,6 @@ import Link from 'next/link';
 import MainLayout from '@/components/layout/MainLayout';
 import Button from '@/components/ui/Button';
 
-import { sendCotizacionForm, sendViaMailto, CotizacionData } from '@/services/emailService';
-
 export default function CotizacionPage() {
   // Estado para manejar las animaciones (no utilizado actualmente)
   // const [isVisible, setIsVisible] = useState({
@@ -311,7 +309,7 @@ export default function CotizacionPage() {
 
     try {
       // Preparar datos para enviar
-      const cotizacionData: CotizacionData = {
+      const cotizacionData = {
         // Información personal/empresa
         tipoPersona,
         dni: formData.dni,
@@ -339,10 +337,18 @@ export default function CotizacionPage() {
         comentarios: formData.comentarios
       };
 
-      // Intentar enviar con EmailJS
-      const result = await sendCotizacionForm(cotizacionData);
+      // Enviar a la API
+      const response = await fetch('/api/cotizacion', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(cotizacionData),
+      });
 
-      if (result.success) {
+      const result = await response.json();
+
+      if (response.ok && result.success) {
         // Éxito
         setFormStatus({
           isSubmitting: false,
@@ -354,20 +360,13 @@ export default function CotizacionPage() {
         // Iniciar contador de reset automático
         setResetCountdown(5);
       } else {
-        // Error con EmailJS, ofrecer alternativa
+        // Error
         setFormStatus({
           isSubmitting: false,
           isSuccess: false,
           isError: true,
-          message: `${result.message} ¿Deseas enviar por email tradicional?`
+          message: result.error || 'Ocurrió un error al enviar la solicitud'
         });
-        
-        // Después de 3 segundos, ofrecer mailto como alternativa
-        setTimeout(() => {
-          if (window.confirm('¿Deseas abrir tu cliente de email para enviar la solicitud?')) {
-            sendViaMailto(cotizacionData, 'cotizacion');
-          }
-        }, 3000);
       }
 
     } catch (error) {
@@ -376,35 +375,8 @@ export default function CotizacionPage() {
         isSubmitting: false,
         isSuccess: false,
         isError: true,
-        message: 'Ocurrió un error al enviar la solicitud. ¿Deseas enviar por email tradicional?'
+        message: 'Error de conexión. Por favor, inténtalo de nuevo.'
       });
-      
-      // Ofrecer mailto como alternativa
-      setTimeout(() => {
-        if (window.confirm('¿Deseas abrir tu cliente de email para enviar la solicitud?')) {
-          const cotizacionData: CotizacionData = {
-            tipoPersona,
-            dni: formData.dni,
-            nombres: formData.nombres,
-            ruc: formData.ruc,
-            razon_social: formData.razon_social,
-            celular: formData.celular,
-            email: formData.email,
-            tipoSeleccionProducto,
-            productoUnico,
-            cantidadUnico,
-            productosSeleccionados,
-            unidadMedida,
-            tipoEntrega,
-            ciudad: formData.ciudad,
-            direccion: formData.direccion,
-            celular_receptor: formData.celular_receptor,
-            tipoDescarga,
-            comentarios: formData.comentarios
-          };
-          sendViaMailto(cotizacionData, 'cotizacion');
-        }
-      }, 3000);
     }
   };
 
