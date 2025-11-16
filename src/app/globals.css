@@ -1,9 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700;800&display=swap');
 
 .font-anton {
   font-family: "Anton", sans-serif;
   font-weight: 800;
   font-style: normal;
+}
+
+.font-oswald {
+  font-family: "Oswald", sans-serif;
+}
+
+.font-construction {
+  font-family: "Oswald", "Anton", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 @import "tailwindcss";

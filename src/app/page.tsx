@@ -138,7 +138,7 @@ export default function Home() {
 
         {/* Contenido en dos columnas */}
         <div className="relative h-full flex items-center z-20 py-4">
-          <div className="container mx-auto">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 lg:gap-8 items-center justify-center h-full">
               
               {/* Segunda columna - Imagen (Primera en móviles) */}
@@ -180,13 +180,13 @@ export default function Home() {
 
               {/* Primera columna - Texto (Segunda en móviles) */}
               <motion.div 
-                className="flex flex-col justify-center order-2 lg:order-1 w-full"
+                className="flex flex-col justify-center order-2 lg:order-1 w-full px-4 md:px-6 lg:px-0"
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
               >
                 <motion.div 
-                  className="bg-[#FC602E]/90 p-4 sm:p-6 lg:p-8 rounded-lg shadow-lg backdrop-blur-sm mx-auto w-full max-w-md lg:max-w-none"
+                  className="bg-[#FC602E]/90 p-6 md:p-8 lg:p-8 rounded-lg shadow-lg backdrop-blur-sm mx-auto w-full max-w-lg md:max-w-xl lg:max-w-none"
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
@@ -197,15 +197,18 @@ export default function Home() {
                   }}
                 >
                   <motion.h1 
-                    className="text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl font-bold text-white mb-2 sm:mb-3 lg:mb-4 text-center lg:text-left leading-tight"
+                    className="font-construction text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-extrabold text-white mb-3 md:mb-4 lg:mb-4 text-center lg:text-left leading-tight tracking-wide"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
+                    style={{
+                      textShadow: "3px 3px 6px rgba(0, 0, 0, 0.5), 1px 1px 3px rgba(0, 0, 0, 0.8)"
+                    }}
                   >
                     FABRICANTES DE LADRILLOS DE ARCILLA
                   </motion.h1>
                   <motion.p 
-                    className="text-sm sm:text-base lg:text-lg xl:text-xl text-white mb-3 sm:mb-4 lg:mb-6 text-center lg:text-left"
+                    className="text-base md:text-lg lg:text-lg xl:text-xl text-white mb-4 md:mb-5 lg:mb-6 text-center lg:text-left"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.6 }}
@@ -213,20 +216,20 @@ export default function Home() {
                     Empresa Riojana contribuyendo al desarrollo del Alto Mayo.
                   </motion.p>
                   <motion.div
-                    className="flex flex-col sm:flex-row gap-2 sm:gap-3 lg:gap-4 justify-center lg:justify-start"
+                    className="flex flex-col sm:flex-row gap-3 md:gap-4 lg:gap-4 justify-center lg:justify-start"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.8 }}
                   >
                     <Link 
                       href="/productos" 
-                      className="bg-white text-[#FC602E] px-3 py-2 sm:px-4 sm:py-2 lg:px-6 lg:py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300 text-center text-xs sm:text-sm lg:text-base"
+                      className="bg-white text-[#FC602E] px-4 py-3 md:px-5 md:py-3 lg:px-6 lg:py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-300 text-center text-sm md:text-base lg:text-base"
                     >
                       Ver Productos
                     </Link>
                     <Link 
                       href="/cotizacion" 
-                      className="bg-transparent border-2 border-white text-white px-3 py-2 sm:px-4 sm:py-2 lg:px-6 lg:py-3 rounded-lg font-semibold hover:bg-white hover:text-[#FC602E] transition-all duration-300 text-center text-xs sm:text-sm lg:text-base"
+                      className="bg-transparent border-2 border-white text-white px-4 py-3 md:px-5 md:py-3 lg:px-6 lg:py-3 rounded-lg font-semibold hover:bg-white hover:text-[#FC602E] transition-all duration-300 text-center text-sm md:text-base lg:text-base"
                     >
                       Solicitar Cotización
                     </Link>
@@ -335,7 +338,7 @@ export default function Home() {
                   animate={isVisible.productos ? { opacity: 1 } : { opacity: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 }}
                 >
-                  Ideal para muros divisorios y cerramientos, se adapta a proyectos residenciales, comerciales e industriales.  
+                Ladrillo Pandereta acanalado, resistente, sin salitre y con excelente adherencia al tarrajeo. Ideal para muros divisorios.
                 </motion.p>
               </div>
             </motion.div>
@@ -378,7 +381,7 @@ export default function Home() {
                   animate={isVisible.productos ? { opacity: 1 } : { opacity: 0 }}
                   transition={{ duration: 0.5, delay: 0.5 }}
                 >
-                  Diseñado para losas aligeradas. Ofrece alta resistencia y menor peso en la estructura.
+                  Fabricados para la construcción de techos aligerados del último piso. Ofrece alta resistencia y menor peso en la estructura.
                 </motion.p>
               </div>
             </motion.div>
@@ -421,7 +424,7 @@ export default function Home() {
                   animate={isVisible.productos ? { opacity: 1 } : { opacity: 0 }}
                   transition={{ duration: 0.5, delay: 0.6 }}
                 >
-                  Para muros portantes. Alta resistencia sísmica y durabilidad para construcciones seguras.
+                 Se utiliza para la construcción de muros portantes, que son los que soportan el peso de la estructura debido a su alta resistencia.
                 </motion.p>
               </div>
             </motion.div>
@@ -495,8 +498,8 @@ export default function Home() {
                 variants={fadeInUp}
                 transition={{ delay: 0.2 }}
               >
-                Somos una empresa con varios años de experiencia, comprometida con entregar
-                productos bien cocidos y con la satisfacción de nuestros clientes.
+                Somos una empresa con varios años de experiencia, comprometida con entregar buenos
+                productos y con la satisfacción de nuestros clientes.
               </motion.p>
             </motion.div>
 

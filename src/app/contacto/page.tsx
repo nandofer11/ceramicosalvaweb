@@ -47,7 +47,7 @@ export default function ContactoPage() {
     },
     {
       question: "¿Ofrecen descuentos para compras al por mayor?",
-      answer: "Sí, contamos con precios para compras al por mayor y para proyectos de construcción. El descuento aplica a partir de trailers de +10 millares."
+      answer: "Sí, contamos con precios para compras al por mayor y para proyectos de construcción. El descuento aplica a partir de trailers de +12 millares."
     },
     {
       question: "¿Tienen servicio de transporte?",

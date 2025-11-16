@@ -1,5 +1,15 @@
 import type { Metadata } from "next";
+import { Oswald } from 'next/font/google';
+import WhatsAppButton from '@/components/ui/WhatsAppButton';
 import "./globals.css";
+
+// Fuente robusta para títulos de construcción
+const oswald = Oswald({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-oswald',
+  display: 'swap',
+});
 
 
 export const metadata: Metadata = {
@@ -40,8 +50,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body >
-      {children}
+      <body className={`${oswald.variable}`}>
+        {children}
+        <WhatsAppButton />
       </body>
     </html>
   );

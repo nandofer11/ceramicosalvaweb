@@ -142,7 +142,7 @@ export default function EmpresaPage() {
               transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
               className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto"
             >
-              Cerámicos Alva, una empresa comprometida con ofrecer buenos productos.
+              Cerámicos Alva, empresa comprometida con ofrecer buenos productos.
             </motion.p>
           </div>
         </motion.div>
@@ -179,7 +179,7 @@ export default function EmpresaPage() {
                   Nuestra planta de producción, está ubicada en el Caserío &quot;Las Delicias&quot;, en el kilómetro 8 de la Carretera Fernando Belaunde Terry, en Rioja.
                 </p>
                 <p className="text-gray-700 mb-6 leading-relaxed text-justify">
-                  A lo largo de estos años, hemos ido perfeccionado nuestros procesos, incorporado maquinaria y formnado un buen equipo para ofrecer ladrillos que cumplen con la industria de la construcción.
+                  A lo largo de estos años, hemos ido perfeccionado nuestros procesos, incorporado maquinaria y formando un buen equipo para ofrecer ladrillos que cumplen con la industria de la construcción.
                 </p>
               </div>
               

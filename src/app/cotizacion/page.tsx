@@ -119,6 +119,21 @@ export default function CotizacionPage() {
     setResetCountdown(0);
   };
 
+  // Funciones para WhatsApp
+  const handleWhatsAppImmediate = () => {
+    const phoneNumber = '+51970584592';
+    const message = encodeURIComponent('Hola, vengo de la web de ceramicosalva.com. Necesito una cotización. ¿Pueden ayudarme?');
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  const handleWhatsAppContact = () => {
+    const phoneNumber = '+51970584592';
+    const message = encodeURIComponent('Hola, vengo de la web de ceramicosalva.com. Me gustaría hablar con un asesor sobre sus productos.');
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   // Función para obtener el nombre del producto por ID
   const getProductNameById = (productId: string): string => {
     const productNames: { [key: string]: string } = {
@@ -1467,8 +1482,9 @@ export default function CotizacionPage() {
               </div>
               <div className="flex-1">
                 <h4 className="text-base font-bold text-green-800">Atención inmediata</h4>
-                <p className="text-xs text-green-700 mb-2">Cotización urgente por WhatsApp</p>
+                <p className="text-xs text-green-700 mb-2">Cotización directa por WhatsApp</p>
                 <Button
+                  onClick={handleWhatsAppImmediate}
                   className="bg-green-600 hover:bg-green-700 text-white py-1.5 px-3 rounded-lg text-xs shadow-sm w-full flex items-center justify-center"
                 >
                   <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -1635,13 +1651,14 @@ export default function CotizacionPage() {
               Nuestro equipo de ventas está listo para atenderle y resolver todas sus dudas sobre productos y precios.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-[#FC602E] hover:bg-[#e55525] text-white py-3 px-8 rounded-lg flex items-center justify-center shadow-lg">
+              <Button 
+                onClick={handleWhatsAppContact}
+                className="bg-[#FC602E] hover:bg-[#e55525] text-white py-3 px-8 rounded-lg flex items-center justify-center shadow-lg"
+              >
                 <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
                 </svg>
-                <Link href="/contacto">
-                  Contactar por WhatsApp
-                </Link>
+                Contactar por WhatsApp
               </Button>
             </div>
           </div>

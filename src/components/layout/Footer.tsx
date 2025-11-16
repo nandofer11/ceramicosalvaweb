@@ -7,9 +7,9 @@ const Footer = () => {
   return (
     <footer className="bg-secondary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {/* Column 1: Company Info */}
-          <div className="space-y-3 text-white text-center sm:text-left">
+          <div className="space-y-3 text-white text-center md:text-left">
             <Link href="/" className="inline-block">
               <Image src="/images/logo_white.png" alt="Cerámicos Alva" width={100} height={100} />
             </Link>
@@ -23,8 +23,97 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Column 2: Quick Links */}
-          <div className="text-center sm:text-left">
+          {/* En móviles: Menu y Productos en dos columnas */}
+          <div className="grid grid-cols-2 gap-4 md:hidden">
+            {/* Column 2: Quick Links - Mobile */}
+            <div>
+              <h3 className="text-white font-bold mb-3">Menu</h3>
+              <ul className="space-y-2 text-white">
+                <li>
+                  <Link
+                    href="/"
+                    className="text-sm hover:text-primary transition-colors"
+                  >
+                    Inicio
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/empresa"
+                    className="text-sm hover:text-primary transition-colors"
+                  >
+                    Nuestra Empresa
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/productos"
+                    className="text-sm hover:text-primary transition-colors"
+                  >
+                    Productos
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/contacto"
+                    className="text-sm hover:text-primary transition-colors"
+                  >
+                    Contacto
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/cotizacion"
+                    className="text-sm hover:text-primary transition-colors"
+                  >
+                    Solicitar cotización
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 3: Products - Mobile */}
+            <div>
+              <h3 className="text-white font-bold mb-3">Productos</h3>
+              <ul className="space-y-2 text-white">
+                <li>
+                  <Link
+                    href="/productos#pandereta"
+                    className="text-sm hover:text-primary transition-colors"
+                  >
+                    Pandereta rayas
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/productos#techo"
+                    className="text-sm hover:text-primary transition-colors"
+                  >
+                    Techo 12
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/productos#king-kong"
+                    className="text-sm hover:text-primary transition-colors"
+                  >
+                    King Kong 18 huecos
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/productos#segunda"
+                    className="text-sm hover:text-primary transition-colors"
+                  >
+                    Ladrillos de segunda
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Column 2: Quick Links - Desktop */}
+          <div className="hidden md:block">
             <h3 className="text-white font-bold mb-3">Menu</h3>
             <ul className="space-y-2 text-white">
               <li>
@@ -70,8 +159,8 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Column 3: Products */}
-          <div className='text-center sm:text-left'>
+          {/* Column 3: Products - Desktop */}
+          <div className="hidden md:block">
             <h3 className="text-white font-bold mb-3">Productos</h3>
             <ul className="space-y-2 text-white">
               <li>
@@ -110,7 +199,7 @@ const Footer = () => {
           </div>
 
           {/* Column 4: Contact Info */}
-          <div className='text-center sm:text-left'>
+          <div>
             <h3 className="text-white font-bold mb-3">Contacto</h3>
             <div className="space-y-3 text-white">
               <p className="text-sm flex items-start">
