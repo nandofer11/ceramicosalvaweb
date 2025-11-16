@@ -2,10 +2,8 @@
 "use client";
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import MainLayout from '@/components/layout/MainLayout';
-import Button from '@/components/ui/Button';
 import { motion } from 'framer-motion';
 
 const products = [
