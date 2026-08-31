@@ -15,19 +15,19 @@ const transporter = nodemailer.createTransport({
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { nombre, apellido, email, telefono, mensaje } = body;
+    const { nombre_completo, email, telefono, ciudad, mensaje } = body;
 
     // Validación básica
-    if (!nombre || !apellido || !email || !mensaje) {
+    if (!nombre_completo || !ciudad || !mensaje) {
       return NextResponse.json(
         { error: 'Todos los campos requeridos deben ser completados' },
         { status: 400 }
       );
     }
 
-    // Validar formato de email
+    // Validar formato de email (si se proporciona)
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (email && !emailRegex.test(email)) {
       return NextResponse.json(
         { error: 'El formato del email no es válido' },
         { status: 400 }
@@ -48,7 +48,7 @@ export async function POST(req: Request) {
     const adminMail = {
       from: process.env.EMAIL_USER,
       to: 'ceramicosalva@gmail.com',
-      subject: `Nuevo mensaje de contacto - ${nombre} ${apellido}`,
+      subject: `Nuevo mensaje de contacto - ${nombre_completo}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <div style="background: linear-gradient(135deg, #FC602E, #e55525); color: white; padding: 30px; border-radius: 10px 10px 0 0; text-align: center;">
@@ -64,14 +64,18 @@ export async function POST(req: Request) {
               <table style="width: 100%; border-collapse: collapse;">
                 <tr>
                   <td style="padding: 8px 0; font-weight: bold; width: 30%;">Nombre completo:</td>
-                  <td style="padding: 8px 0;">${nombre} ${apellido}</td>
+                  <td style="padding: 8px 0;">${nombre_completo}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; font-weight: bold;">Ciudad / Distrito:</td>
+                  <td style="padding: 8px 0;">${ciudad}</td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; font-weight: bold;">Email:</td>
-                  <td style="padding: 8px 0;">${email}</td>
+                  <td style="padding: 8px 0;">${email || 'No proporcionado'}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 8px 0; font-weight: bold;">Teléfono:</td>
+                  <td style="padding: 8px 0; font-weight: bold;">Celular / WhatsApp:</td>
                   <td style="padding: 8px 0;">${telefono || 'No proporcionado'}</td>
                 </tr>
               </table>
@@ -89,7 +93,7 @@ export async function POST(req: Request) {
           
           <div style="text-align: center; padding: 20px; color: #666; font-size: 14px;">
             <p>Este correo fue generado automáticamente desde el sitio web de Cerámicos Alva</p>
-            <p>Para responder, utiliza directamente el email: <strong>${email}</strong></p>
+            <p>Para responder, utiliza directamente el email: <strong>${email || 'o por WhatsApp +51 970 584 592'}</strong></p>
           </div>
         </div>
       `,
@@ -109,7 +113,7 @@ export async function POST(req: Request) {
           <div style="background: #f8f9fa; padding: 30px; border-radius: 0 0 10px 10px;">
             <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
               <p style="margin: 0 0 15px 0;">
-                Hola <strong>${nombre}</strong>,
+                Hola <strong>${nombre_completo.split(' ')[0]}</strong>,
               </p>
               <p style="margin: 0 0 15px 0;">
                 Hemos recibido tu mensaje con fecha <strong>${fechaSolicitud}</strong>.
@@ -143,16 +147,16 @@ export async function POST(req: Request) {
       `,
     };
 
-    // Enviar ambos correos
-    await Promise.all([
-      transporter.sendMail(adminMail),
-      transporter.sendMail(clientMail)
-    ]);
+    // Enviar el correo al administrador y, si hay email, la confirmación al cliente
+    const mails = [adminMail];
+    if (email) mails.push(clientMail);
+
+    await Promise.all(mails.map((mail) => transporter.sendMail(mail)));
 
     return NextResponse.json(
       { 
         success: true, 
-        message: 'Mensaje enviado correctamente. Recibirás una confirmación por email y nos pondremos en contacto contigo pronto.' 
+        message: 'Mensaje enviado correctamente. Nos pondremos en contacto contigo pronto.' 
       },
       { status: 200 }
     );

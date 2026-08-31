@@ -25,7 +25,7 @@ const WhatsAppButton = () => {
         onClick={handleClick}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group"
+        className="bg-green-500 hover:bg-green-600 text-white p-4 rounded-xl border border-white/20 shadow-[0_4px_0_0_rgba(0,0,0,0.35)] hover:shadow-[0_5px_0_0_rgba(0,0,0,0.35)] transition-all duration-300 flex items-center justify-center group"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         aria-label="Contactar por WhatsApp"

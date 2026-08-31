@@ -1,13 +1,20 @@
 import type { Metadata } from "next";
-import { Oswald } from 'next/font/google';
+import { Oswald, Inter } from 'next/font/google';
 import WhatsAppButton from '@/components/ui/WhatsAppButton';
 import "./globals.css";
 
-// Fuente robusta para títulos de construcción
+// Tipografía display industrial para títulos
 const oswald = Oswald({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-oswald',
+  display: 'swap',
+});
+
+// Tipografía de cuerpo legible
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
   display: 'swap',
 });
 
@@ -49,8 +56,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
-      <body className={`${oswald.variable}`}>
+    <html lang="es" data-scroll-behavior="smooth">
+      <body className={`${oswald.variable} ${inter.variable}`}>
         {children}
         <WhatsAppButton />
       </body>

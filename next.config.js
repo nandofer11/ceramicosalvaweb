@@ -15,6 +15,10 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 
+  // Permitir acceso desde dispositivos en red local durante dev (HMR remoto)
+  // Ajusta al IP y puerto de tu red cuando uses otros dispositivos para probar
+  allowedDevOrigins: ['192.168.18.29', 'localhost:3000'],
+
   // REQUIRED para SSR con API
   output: 'standalone',
 

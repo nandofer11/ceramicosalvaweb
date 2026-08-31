@@ -1,38 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700;800&display=swap');
-
-.font-anton {
-  font-family: "Anton", sans-serif;
-  font-weight: 800;
-  font-style: normal;
-}
-
-.font-oswald {
-  font-family: "Oswald", sans-serif;
-}
-
-.font-construction {
-  font-family: "Oswald", "Anton", sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
 @import "tailwindcss";
-
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-  --primary: #FC602E;
-  --primary-dark: #EA562F;
-  --primary-light: #F9704B;
-  --secondary: #1E1E1E;
-  --secondary-dark: #020202;
-  --gray-light: #f7f7f7;
-  --gray-medium: #EAEAEA;
-  --gray-dark: #D3D3D3;
-  --danger: #e74c3c;
-  --success: #2ecc71;
+  --foreground: #141517;
+  --primary: #fc5d2b;
+  --primary-dark: #d64a1f;
+  --primary-light: #ff8a65;
+  --secondary: #1e1e1e;
+  --secondary-dark: #0c0d0e;
+  --ink: #252422;
+  --charcoal: #2e2d2b;
+  --paper: #ffffff;
+  --gray-light: #f5f5f4;
+  --gray-medium: #e7e5e4;
+  --gray-dark: #4b5563;
+  --concrete-50: #fafaf9;
+  --concrete-100: #f5f5f4;
+  --concrete-200: #e7e5e4;
+  --concrete-300: #d6d3d1;
+  --concrete-400: #a8a29e;
+  --concrete-500: #78716c;
+  --concrete-600: #57534e;
+  --danger: #dc2626;
+  --success: #16a34a;
+  --accent: #ffffff;
 }
 
 @theme inline {
@@ -43,28 +34,105 @@
   --color-primary-light: var(--primary-light);
   --color-secondary: var(--secondary);
   --color-secondary-dark: var(--secondary-dark);
-  --color-accent: var(--accent);
+  --color-ink: var(--ink);
+  --color-charcoal: var(--charcoal);
+  --color-paper: var(--paper);
   --color-gray-light: var(--gray-light);
   --color-gray-medium: var(--gray-medium);
   --color-gray-dark: var(--gray-dark);
+  --color-concrete-50: var(--concrete-50);
+  --color-concrete-100: var(--concrete-100);
+  --color-concrete-200: var(--concrete-200);
+  --color-concrete-300: var(--concrete-300);
+  --color-concrete-400: var(--concrete-400);
+  --color-concrete-500: var(--concrete-500);
+  --color-concrete-600: var(--concrete-600);
   --color-danger: var(--danger);
   --color-success: var(--success);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-oswald), ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --gray-light: #2a2a2a;
-    --gray-medium: #404040;
-    --gray-dark: #a0a0a0;
-  }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
-  /* background: var(--background); */
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+/* ---- Tipografía de respaldo (mientras se migran páginas) ---- */
+.font-anton,
+.font-construction {
+  font-family: var(--font-oswald), "Anton", sans-serif;
+}
+
+.font-oswald {
+  font-family: var(--font-oswald), "Oswald", sans-serif;
+}
+
+/* ---- Utilidades industriales ---- */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-oswald), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+.stripes-primary {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--primary) 0 10px,
+    var(--primary-dark) 10px 20px
+  );
+}
+
+.stripes-white {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.9) 0 10px,
+    rgba(255, 255, 255, 0.35) 10px 20px
+  );
+}
+
+.bg-grid-dark {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.bg-grid-light {
+  background-image:
+    linear-gradient(to right, rgba(20, 21, 23, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 21, 23, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.clip-corner {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 16px) 0,
+    100% 16px,
+    100% 100%,
+    16px 100%,
+    0 calc(100% - 16px)
+  );
 }
