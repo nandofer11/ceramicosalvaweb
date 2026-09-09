@@ -138,7 +138,7 @@ export default function ProductDetailPage() {
               transition={{ duration: 0.6 }}
             >
               {/* Imagen/video principal con flechas overlay */}
-              <div className="relative border-2 border-concrete-200 bg-concrete-100 group overflow-hidden clip-corner h-full flex items-center justify-center p-2">
+              <div className="relative border-2 border-concrete-200 bg-concrete-100 group overflow-hidden clip-corner h-[320px] sm:h-[400px] lg:h-full flex items-center justify-center p-2">
                 <div className="relative w-full h-full">
                   {currentSlide.type === 'image' ? (
                     <div
