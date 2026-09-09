@@ -75,6 +75,11 @@ const contactoItems = [
 const inputClass =
   'w-full px-4 py-3 border border-concrete-200 bg-concrete-50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/40 transition-all duration-300 text-ink placeholder:text-concrete-400';
 
+const inputErrorClass =
+  'w-full px-4 py-3 border-2 border-danger bg-danger/5 focus:outline-none focus:ring-2 focus:ring-danger/30 transition-all duration-300 text-ink placeholder:text-concrete-400';
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function ContactoPage() {
   const [expandedFaq, setExpandedFaq] = useState(-1);
 
@@ -85,6 +90,12 @@ export default function ContactoPage() {
     ciudad: '',
     mensaje: '',
   });
+  const [formErrors, setFormErrors] = useState<{
+    nombre_completo?: string;
+    email?: string;
+    ciudad?: string;
+    mensaje?: string;
+  }>({});
   const [formStatus, setFormStatus] = useState({
     isSubmitting: false,
     isSuccess: false,
@@ -104,17 +115,48 @@ export default function ContactoPage() {
       ...prevData,
       [name]: value,
     }));
+    setFormErrors((prev) => {
+      if (!prev[name as keyof typeof prev]) return prev;
+      const next = { ...prev };
+      delete next[name as keyof typeof next];
+      return next;
+    });
+  };
+
+  const validateForm = () => {
+    const errors: typeof formErrors = {};
+
+    if (!formData.nombre_completo.trim()) {
+      errors.nombre_completo = 'El nombre completo es obligatorio.';
+    }
+
+    if (formData.email.trim()) {
+      if (!emailRegex.test(formData.email.trim())) {
+        errors.email = 'Ingresa un correo válido.';
+      }
+    }
+
+    if (!formData.ciudad.trim()) {
+      errors.ciudad = 'La ciudad o distrito es obligatorio.';
+    }
+
+    if (!formData.mensaje.trim()) {
+      errors.mensaje = 'El mensaje es obligatorio.';
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!formData.nombre_completo || !formData.ciudad || !formData.mensaje) {
+    if (!validateForm()) {
       setFormStatus({
         isSubmitting: false,
         isSuccess: false,
-        isError: true,
-        message: 'Por favor completa todos los campos obligatorios.',
+        isError: false,
+        message: '',
       });
       return;
     }
@@ -175,7 +217,7 @@ export default function ContactoPage() {
     <MainLayout>
       
       {/* ============ FORMULARIO + INFORMACIÓN ============ */}
-      <section id="formulario-contacto" className="py-20 md:py-24 bg-paper">
+      <section id="formulario-contacto" className="py-16 bg-paper">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
             {/* Formulario */}
@@ -185,14 +227,14 @@ export default function ContactoPage() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="relative border-2 border-concrete-200 bg-white p-7 md:p-9 clip-corner">
+              <div className="relative border-2 border-concrete-200 bg-white p-6 md:p-7 clip-corner">
                 <StripeBar className="absolute top-0 left-0 right-0 h-1.5" />
-                <h2 className="font-display uppercase text-2xl md:text-3xl font-bold text-ink mb-2">
+                <h2 className="font-display uppercase text-xl md:text-2xl font-bold text-ink mb-1">
                   Envíanos un mensaje
                 </h2>
-                <div className="h-1 bg-primary w-16 mb-8" aria-hidden />
+                <div className="h-1 bg-primary w-16 mb-6" aria-hidden />
 
-                <form className="space-y-5" onSubmit={handleSubmit} noValidate>
+                <form className="space-y-4" onSubmit={handleSubmit} noValidate>
                   <AnimatePresence>
                     {(formStatus.isSuccess || formStatus.isError) && (
                       <motion.div
@@ -256,39 +298,46 @@ export default function ContactoPage() {
                   </AnimatePresence>
 
                   <div>
-                    <label htmlFor="nombre_completo" className="block text-sm font-semibold text-gray-dark mb-2">
-                      Nombre completo
+                    <label htmlFor="nombre_completo" className="block text-sm font-semibold text-gray-dark mb-1.5">
+                      Nombre completo <span className="text-danger">*</span>
                     </label>
                     <input
                       type="text"
                       id="nombre_completo"
                       name="nombre_completo"
-                      className={inputClass}
+                      className={formErrors.nombre_completo ? inputErrorClass : inputClass}
                       placeholder="Tu nombre completo"
                       required
                       value={formData.nombre_completo}
                       onChange={handleInputChange}
                     />
-                    <p className="mt-1.5 text-xs text-concrete-400">Ej. Carlos Pérez</p>
+                    {formErrors.nombre_completo ? (
+                      <p className="mt-1.5 text-xs font-medium text-danger">{formErrors.nombre_completo}</p>
+                    ) : (
+                      <p className="mt-1.5 text-xs text-concrete-400">Ej. Carlos Pérez</p>
+                    )}
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm font-semibold text-gray-dark mb-2">
+                    <label htmlFor="email" className="block text-sm font-semibold text-gray-dark mb-1.5">
                       Correo Electrónico <span className="text-xs font-normal text-concrete-400">(opcional)</span>
                     </label>
                     <input
                       type="email"
                       id="email"
                       name="email"
-                      className={inputClass}
+                      className={formErrors.email ? inputErrorClass : inputClass}
                       placeholder="tu@ejemplo.com"
                       value={formData.email}
                       onChange={handleInputChange}
                     />
+                    {formErrors.email && (
+                      <p className="mt-1.5 text-xs font-medium text-danger">{formErrors.email}</p>
+                    )}
                   </div>
 
                   <div>
-                    <label htmlFor="telefono" className="block text-sm font-semibold text-gray-dark mb-2">
+                    <label htmlFor="telefono" className="block text-sm font-semibold text-gray-dark mb-1.5">
                       Celular / WhatsApp
                     </label>
                     <input
@@ -304,38 +353,44 @@ export default function ContactoPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="ciudad" className="block text-sm font-semibold text-gray-dark mb-2">
-                      Ciudad / Distrito
+                    <label htmlFor="ciudad" className="block text-sm font-semibold text-gray-dark mb-1.5">
+                      Ciudad / Distrito <span className="text-danger">*</span>
                     </label>
                     <input
                       type="text"
                       id="ciudad"
                       name="ciudad"
-                      className={inputClass}
+                      className={formErrors.ciudad ? inputErrorClass : inputClass}
                       placeholder="Ej. Rioja"
                       required
                       value={formData.ciudad}
                       onChange={handleInputChange}
                     />
+                    {formErrors.ciudad && (
+                      <p className="mt-1.5 text-xs font-medium text-danger">{formErrors.ciudad}</p>
+                    )}
                   </div>
 
                   <div>
-                    <label htmlFor="mensaje" className="block text-sm font-semibold text-gray-dark mb-2">
-                      Mensaje
+                    <label htmlFor="mensaje" className="block text-sm font-semibold text-gray-dark mb-1.5">
+                      Mensaje <span className="text-danger">*</span>
                     </label>
                     <textarea
                       id="mensaje"
                       name="mensaje"
-                      rows={5}
-                      className={inputClass}
+                      rows={4}
+                      className={formErrors.mensaje ? inputErrorClass : inputClass}
                       placeholder="Escribe tu mensaje aquí..."
                       required
                       value={formData.mensaje}
                       onChange={handleInputChange}
                     ></textarea>
+                    {formErrors.mensaje && (
+                      <p className="mt-1.5 text-xs font-medium text-danger">{formErrors.mensaje}</p>
+                    )}
                   </div>
 
-                  <div className="pt-2">
+                  <div className="pt-1">
                     <Button
                       type="submit"
                       fullWidth
@@ -343,7 +398,7 @@ export default function ContactoPage() {
                       loading={formStatus.isSubmitting}
                       iconPosition="right"
                       color="primary"
-                      size="lg"
+                      size="md"
                       icon={
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />

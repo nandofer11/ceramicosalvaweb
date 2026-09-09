@@ -8,7 +8,8 @@ import SectionHeading from '@/components/ui/SectionHeading';
 import StripeBar from '@/components/ui/StripeBar';
 import { motion } from 'framer-motion';
 import { productCategories, products } from '@/lib/products';
-import QualityCard from '@/components/ui/QualityCard';
+import QualitySection from '@/components/ui/CalidadSeccion';
+import TransportBanner from '@/components/ui/TransportBanner';
 
 const beneficios = [
   {
@@ -135,50 +136,25 @@ export default function ProductosPage() {
           </div>
 
           {/* Calidades */}
-          <div className="mt-16 grid gap-6 lg:grid-cols-2">
-            <QualityCard
-              title="Calidad Primera"
-              description="Los productos de primera están hechos para obras visibles y de alta exigencia estructural, con acabado parejo y resistencia uniforme."
-              items={products[0].qualities.primera}
-              variant="primera"
-            />
-            <QualityCard
-              title="Calidad Segunda"
-              description="La calidad segunda mantiene la funcionalidad estructural con un precio más competitivo, pensada para trabajos de relleno y zonas no expuestas."
-              items={products[0].qualities.segunda}
-              variant="segunda"
-              delay={0.1}
-            />
-          </div>
+          <QualitySection
+            className="mt-16"
+            kicker="Calidad"
+            title="Primera y Segunda calidad"
+            description="Ofrecemos ladrillos de primera y segunda calidad. Conoce las características de cada uno para elegir el que mejor se adapte a tu obra."
+            primera={{
+              title: 'Calidad Primera',
+              description: 'Los productos de primera están hechos para obras visibles y de alta exigencia estructural, con acabado parejo y resistencia uniforme.',
+              items: products[0].qualities.primera,
+            }}
+            segunda={{
+              title: 'Calidad Segunda',
+              description: 'La calidad segunda mantiene la funcionalidad estructural con un precio más competitivo, pensada para trabajos de relleno y zonas no expuestas.',
+              items: products[0].qualities.segunda,
+            }}
+          />
 
           {/* Banner transporte y descarga */}
-          <motion.div
-            className="mt-16 relative border-2 border-concrete-200 bg-concrete-100 p-7 md:p-9"
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-          >
-            <StripeBar className="absolute top-0 left-0 right-0 h-1.5" />
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-              <div className="w-14 h-14 bg-primary flex items-center justify-center flex-shrink-0">
-                <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-                </svg>
-              </div>
-              <div className="flex-1">
-                <h3 className="font-display uppercase text-2xl font-semibold text-ink mb-2">
-                  Transporte y Descarga
-                </h3>
-                <p className="text-concrete-600 leading-relaxed text-justify">
-                  Entregamos el ladrillo <strong>cargado a su movilidad sin costo adicional</strong>. Si requiere entrega a domicilio, contamos con <strong>servicio adicional de transporte y descarga</strong>.
-                </p>
-              </div>
-            </div>
-            
-                        <StripeBar className="absolute bottom-0 left-0 right-0 h-1.5" />
-
-          </motion.div>
+          <TransportBanner className="mt-16" />
         </div>
       </section>
 

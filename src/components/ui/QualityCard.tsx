@@ -38,23 +38,24 @@ export default function QualityCard({ title, description, items, variant, delay 
 
   return (
     <motion.div
-      className={`border-l-4 ${v.border} bg-white p-5 md:p-6`}
+      className={`group relative border border-white/15 bg-white/5 p-4 md:p-5 backdrop-blur-sm transition-colors duration-300 hover:bg-white/10 border-l-4 ${v.border}`}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.5, delay }}
     >
-      <div className="flex items-center gap-3 mb-3">
-        <span className={`w-9 h-9 ${v.accent} flex items-center justify-center`}>
+      <span className="absolute top-0 left-0 right-0 h-1 bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" aria-hidden />
+      <div className="flex items-center gap-2.5 mb-2">
+        <span className={`w-8 h-8 ${v.accent} flex items-center justify-center flex-shrink-0`}>
           {v.icon}
         </span>
-        <h3 className="font-display uppercase text-lg font-bold text-ink">{title}</h3>
+        <h3 className="font-display uppercase text-sm font-bold text-white leading-tight">{title}</h3>
       </div>
-      <p className="text-concrete-500 text-sm mb-4 leading-relaxed">{description}</p>
-      <ul className="space-y-2">
+      <p className="text-white/70 text-sm mb-2.5 leading-relaxed">{description}</p>
+      <ul className="space-y-1.5">
         {items.map((value) => (
-          <li key={value} className="flex items-start gap-2.5 text-sm text-concrete-600">
-            <span className={`mt-1.5 w-2 h-2 ${v.dot} flex-shrink-0`} />
+          <li key={value} className="flex items-start gap-2 text-sm text-white/85">
+            <span className={`mt-1 w-1.5 h-1.5 ${v.dot} flex-shrink-0`} />
             <span>{value}</span>
           </li>
         ))}

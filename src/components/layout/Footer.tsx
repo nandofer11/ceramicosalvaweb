@@ -173,7 +173,14 @@ const Footer = () => {
             © {currentYear} Cerámicos Alva EIRL. Todos los derechos reservados.
           </p>
           <p className="text-sm text-white/60">
-            Cerámicos Alva 💚
+            <a
+              href="https://wa.me/51970584592?text=Hola%2C%20me%20gustar%C3%ADa%20informaci%C3%B3n%20sobre%20el%20desarrollo%20de%20un%20sitio%20web."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-primary transition-colors"
+            >
+              Desarrollado por O. Fernández 💚
+            </a>
           </p>
         </div>
       </div>

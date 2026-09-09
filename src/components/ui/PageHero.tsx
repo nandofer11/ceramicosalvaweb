@@ -13,7 +13,7 @@ type PageHeroProps = {
 
 const PageHero = ({ kicker, title, description, image, align = 'left' }: PageHeroProps) => {
   return (
-    <section className="relative min-h-[320px] md:min-h-[380px] flex items-center bg-ink text-white overflow-hidden">
+    <section className="relative min-h-[320px] flex items-center bg-ink text-white overflow-hidden">
       <div className="absolute inset-0" aria-hidden>
         {image ? (
           <Image
@@ -32,8 +32,6 @@ const PageHero = ({ kicker, title, description, image, align = 'left' }: PageHer
               : 'bg-gradient-to-b from-ink/85 via-ink/75 to-ink/70'
           }`}
         />
-        <div className="absolute inset-0 bg-grid-dark" />
-        <StripeBar className="absolute top-0 left-0 right-0 h-2" />
       </div>
 
       <div className={`relative container mx-auto px-4 sm:px-6 lg:px-8 py-16 ${align === 'center' ? 'text-center' : ''}`}>

@@ -7,8 +7,9 @@ import { useParams } from 'next/navigation';
 import MainLayout from '@/components/layout/MainLayout';
 import StripeBar from '@/components/ui/StripeBar';
 import Button from '@/components/ui/Button';
-import QualityCard from '@/components/ui/QualityCard';
-import { motion } from 'framer-motion';
+import QualitySection from '@/components/ui/CalidadSeccion';
+import TransportBanner from '@/components/ui/TransportBanner';
+import { motion, AnimatePresence } from 'framer-motion';
 import { getProductById } from '@/lib/products';
 
 function getSpecIcon(spec: string) {
@@ -130,22 +131,22 @@ export default function ProductDetailPage() {
           <div className="grid gap-8 lg:grid-cols-[1.7fr_1fr]">
             {/* Columna principal — Galería */}
             <motion.div
-              className="space-y-4"
+              className="h-full"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.6 }}
             >
               {/* Imagen/video principal con flechas overlay */}
-              <div className="relative border-2 border-concrete-200 bg-concrete-100 clip-corner group">
-                <div className="relative">
+              <div className="relative border-2 border-concrete-200 bg-concrete-100 group overflow-hidden clip-corner h-full flex items-center justify-center p-2">
+                <div className="relative w-full h-full">
                   {currentSlide.type === 'image' ? (
                     <div
                       role="button"
                       tabIndex={0}
                       onClick={openImageModal}
                       onKeyDown={(event) => event.key === 'Enter' && openImageModal()}
-                      className="relative h-[320px] sm:h-[420px] cursor-zoom-in"
+                      className="relative w-full h-full cursor-zoom-in"
                       title="Ver imagen en pantalla completa"
                     >
                       <Image
@@ -153,42 +154,33 @@ export default function ProductDetailPage() {
                         alt={currentSlide.alt}
                         fill
                         sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-cover"
+                        className="object-contain"
                         loading="eager"
                       />
                       <span className="absolute left-4 top-4 z-20 bg-primary px-3 py-1 text-white text-sm font-display uppercase tracking-widest">
                         {currentSlide.alt}
                       </span>
-                      <span className="absolute right-4 top-4 z-20 flex items-center gap-2 bg-ink/80 px-3 py-1 text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                        <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M8 3H5a2 2 0 0 0-2 2v3"></path>
-                          <path d="M16 3h3a2 2 0 0 1 2 2v3"></path>
-                          <path d="M8 21H5a2 2 0 0 1-2-2v-3"></path>
-                          <path d="M16 21h3a2 2 0 0 0 2-2v-3"></path>
-                        </svg>
-                        Ampliar
-                      </span>
                     </div>
                   ) : (
-                    <div className="relative h-[320px] sm:h-[420px] bg-ink flex items-center justify-center">
+                    <div className="relative w-full h-full">
                       <video
                         src={currentSlide.videoUrl}
                         poster={currentSlide.poster}
                         controls
-                        className="w-full h-full object-contain"
+                        className="absolute inset-0 w-full h-full object-contain"
                       />
-                      <span className="absolute left-4 top-4 z-20 bg-ink/80 px-3 py-1 text-white text-sm font-display uppercase tracking-widest">
+                      <span className="absolute left-4 top-4 z-20 bg-primary px-3 py-1 text-white text-sm font-display uppercase tracking-widest">
                         {currentSlide.title}
                       </span>
                     </div>
                   )}
                 </div>
 
-                {/* Flechas overlay */}
+                {/* Flechas */}
                 <button
                   type="button"
                   onClick={() => setActiveIndex((activeIndex + gallery.length - 1) % gallery.length)}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-ink/70 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary cursor-pointer"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-ink/70 text-white flex items-center justify-center hover:bg-primary transition-colors cursor-pointer"
                   aria-label="Imagen anterior"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -198,7 +190,7 @@ export default function ProductDetailPage() {
                 <button
                   type="button"
                   onClick={() => setActiveIndex((activeIndex + 1) % gallery.length)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-ink/70 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary cursor-pointer"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-ink/70 text-white flex items-center justify-center hover:bg-primary transition-colors cursor-pointer"
                   aria-label="Imagen siguiente"
                 >
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -206,44 +198,32 @@ export default function ProductDetailPage() {
                   </svg>
                 </button>
 
-                {/* Contador */}
-                <span className="absolute bottom-3 right-3 z-20 bg-ink/70 px-2.5 py-1 text-white text-xs font-display tracking-widest">
-                  {activeIndex + 1} / {gallery.length}
-                </span>
-              </div>
-
-              {/* Miniaturas */}
-              <div className="grid grid-cols-5 gap-2">
-                {gallery.map((item, index) => (
+                {/* Botón ampliar + contador */}
+                <div className="absolute bottom-3 right-3 z-20 flex items-center gap-2">
                   <button
-                    key={`${item.type}-${index}`}
                     type="button"
-                    onClick={() => setActiveIndex(index)}
-                    className={`relative h-16 overflow-hidden border-2 bg-concrete-100 transition-colors focus:outline-none ${
-                      index === activeIndex ? 'border-primary' : 'border-concrete-200 hover:border-concrete-300'
-                    }`}
-                    aria-label={item.type === 'image' ? item.alt : item.title}
+                    onClick={openImageModal}
+                    className="bg-ink/70 hover:bg-primary px-2.5 py-1 text-white text-xs font-display uppercase tracking-widest transition-colors cursor-pointer"
+                    aria-label="Ampliar"
                   >
-                    <Image
-                      src={item.type === 'image' ? item.src : item.poster}
-                      alt={item.type === 'image' ? item.alt : item.title}
-                      fill
-                      sizes="120px"
-                      className="object-cover"
-                    />
+                    Ampliar
                   </button>
-                ))}
+                  <span className="bg-ink/70 px-2 py-1 text-white text-xs font-display tracking-widest">
+                    {activeIndex + 1} / {gallery.length}
+                  </span>
+                </div>
               </div>
             </motion.div>
 
             {/* Aside — Card unificado compacto */}
             <motion.aside
+              className="h-full"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <div className="border-2 border-concrete-200 bg-white p-5 md:p-6 clip-corner space-y-5">
+              <div className="border-2 border-concrete-200 bg-white p-5 md:p-6 clip-corner space-y-5 h-full">
                 {/* Descripción */}
                 <div>
                   <h2 className="font-display uppercase text-base font-bold text-ink mb-1">Descripción</h2>
@@ -254,12 +234,38 @@ export default function ProductDetailPage() {
                 <div className="border-t border-concrete-200 pt-4">
                   <h2 className="font-display uppercase text-base font-bold text-ink mb-2">Especificaciones</h2>
                   <ul className="space-y-2">
-                    {product.specs.map((spec) => (
-                      <li key={spec} className="flex items-center gap-2.5 text-sm text-concrete-600">
-                        {getSpecIcon(spec)}
-                        <span>{spec}</span>
-                      </li>
-                    ))}
+                    {product.specs.map((spec) => {
+                      const dimensionMatch = spec.match(/^([\d.]+)\s*x\s*([\d.]+)\s*x\s*([\d.]+)\s*(cm|mm|m)?$/i);
+                      if (dimensionMatch) {
+                        const [, alto, ancho, largo, unit = 'cm'] = dimensionMatch;
+                        const dims = [
+                          { label: 'Alto', value: alto },
+                          { label: 'Ancho', value: ancho },
+                          { label: 'Largo', value: largo },
+                        ];
+                        return (
+                          <li key={spec} className="flex items-start gap-2.5 text-sm text-concrete-600">
+                            {getSpecIcon(spec)}
+                            <div className="grid grid-cols-3 gap-2">
+                              {dims.map((dim) => (
+                                <div key={dim.label} className="border border-concrete-200 bg-concrete-50 px-2 py-1.5 text-center">
+                                  <p className="text-[10px] uppercase tracking-widest text-concrete-400">{dim.label}</p>
+                                  <p className="text-sm font-semibold text-ink">
+                                    {dim.value} <span className="text-concrete-400 text-xs font-normal">{unit}</span>
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          </li>
+                        );
+                      }
+                      return (
+                        <li key={spec} className="flex items-center gap-2.5 text-sm text-concrete-600">
+                          {getSpecIcon(spec)}
+                          <span>{spec}</span>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
 
@@ -289,58 +295,81 @@ export default function ProductDetailPage() {
           </div>
 
           {/* Calidades */}
-          <div className="mt-12 grid gap-5 lg:grid-cols-2">
-            <QualityCard
-              title="Calidad Primera"
-              description="Para obras visibles y de alta exigencia estructural, con acabado parejo y resistencia uniforme."
-              items={product.qualities.primera}
-              variant="primera"
-            />
-            <QualityCard
-              title="Calidad Segunda"
-              description="Funcionalidad estructural con precio competitivo, ideal para rellenos y zonas no expuestas."
-              items={product.qualities.segunda}
-              variant="segunda"
-              delay={0.1}
-            />
-          </div>
+          <QualitySection
+            className="mt-12"
+            kicker="Calidad"
+            title="Primera y Segunda calidad"
+            description="Ofrecemos ladrillos de primera y segunda calidad. Conoce las características de cada uno para elegir el que mejor se adapte a tu obra."
+            primera={{
+              title: 'Calidad Primera',
+              description: 'Para obras visibles y de alta exigencia estructural, con acabado parejo y resistencia uniforme.',
+              items: product.qualities.primera,
+            }}
+            segunda={{
+              title: 'Calidad Segunda',
+              description: 'Funcionalidad estructural con precio competitivo, ideal para rellenos y zonas no expuestas.',
+              items: product.qualities.segunda,
+            }}
+          />
 
           {/* CTA + Banner transporte */}
-          <motion.div
-            className="mt-12 relative border-2 border-concrete-200 bg-concrete-100 p-6 md:p-7 clip-corner"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-          >
-            <StripeBar className="absolute top-0 left-0 right-0 h-1.5" />
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-5">
-              <div className="w-12 h-12 bg-primary flex items-center justify-center flex-shrink-0">
-                <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-                </svg>
-              </div>
-              <div className="flex-1">
-                <h3 className="font-display uppercase text-lg font-semibold text-ink mb-1">
-                  Servicio de Estiba y Transporte
-                </h3>
-                <p className="text-concrete-600 text-sm leading-relaxed">
-                  Entregamos el ladrillo <strong className="text-ink">cargado a su movilidad sin costo adicional</strong>. Servicio adicional de transporte y descarga disponible.
-                </p>
-              </div>
-              <Button size="md" color="primary" className="flex-shrink-0">
-                <Link href="/cotizacion" className="inline-flex items-center">
-                  Solicitar cotización
-                  <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </Link>
-              </Button>
-            </div>
-            <StripeBar className="absolute bottom-0 left-0 right-0 h-1.5" />
-          </motion.div>
+          <TransportBanner className="mt-12" />
         </div>
       </section>
+
+      {/* Modal imagen ampliada */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={closeImageModal}
+          >
+            <motion.button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); closeImageModal(); }}
+              className="absolute top-4 right-4 w-10 h-10 bg-ink/80 text-white flex items-center justify-center hover:bg-primary transition-colors z-10 cursor-pointer"
+              aria-label="Cerrar"
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </motion.button>
+            {currentSlide.type === 'image' ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+                className="relative w-full max-w-4xl max-h-[80vh]"
+              >
+                <Image
+                  src={currentSlide.src}
+                  alt={currentSlide.alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 80vw"
+                  className="object-contain"
+                />
+              </motion.div>
+            ) : (
+              <motion.video
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+                src={currentSlide.videoUrl}
+                poster={currentSlide.poster}
+                controls
+                autoPlay
+                className="w-full max-w-4xl max-h-[80vh] object-contain"
+              />
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </MainLayout>
   );
 }

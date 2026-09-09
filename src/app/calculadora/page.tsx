@@ -6,16 +6,24 @@ import PageHero from '@/components/ui/PageHero';
 import StripeBar from '@/components/ui/StripeBar';
 import Button from '@/components/ui/Button';
 import { motion } from 'framer-motion';
+import { products } from '@/lib/products';
 
-const brickTypes = [
-  { id: 'pandereta', name: 'Pandereta rayas', piecesPerM2: 32, category: 'Muros' },
-  { id: 'king-kong', name: 'King Kong 18 huecos', piecesPerM2: 36, category: 'Muros' },
-  { id: 'techo-12', name: 'Techo 12', piecesPerM2: 9, category: 'Techos' },
-  { id: 'techo-15', name: 'Techo 15', piecesPerM2: 7, category: 'Techos' },
-];
+const brickTypes = products.map((product) => {
+  const spec = product.specs.find((s) => /piezas por m/i.test(s));
+  const match = spec?.match(/(\d+(?:\.\d+)?)/);
+  return {
+    id: product.id,
+    name: product.name,
+    category: product.category,
+    piecesPerM2: match ? Number(match[1]) : 0,
+  };
+});
 
 const inputClass =
   'w-full px-4 py-3 border border-concrete-200 bg-concrete-50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/40 transition-all duration-300 text-ink placeholder:text-concrete-400';
+
+const inputErrorClass =
+  'w-full px-4 py-3 border-2 border-danger bg-danger/5 focus:outline-none focus:ring-2 focus:ring-danger/30 transition-all duration-300 text-ink placeholder:text-concrete-400';
 
 export default function CalculadoraPage() {
   const [inputMode, setInputMode] = useState<'dimensions' | 'area'>('dimensions');
@@ -23,25 +31,45 @@ export default function CalculadoraPage() {
   const [width, setWidth] = useState('');
   const [height, setHeight] = useState('');
   const [directArea, setDirectArea] = useState('');
+  const [errors, setErrors] = useState<{ width?: string; height?: string; area?: string }>({});
   const [results, setResults] = useState<null | { area: number; total: number; brickName: string; piecesPerM2: number }>(null);
 
   const calculate = () => {
     const brick = brickTypes.find((b) => b.id === selectedBrick);
     if (!brick) return;
 
+    const nextErrors: { width?: string; height?: string; area?: string } = {};
     let area = 0;
+
     if (inputMode === 'dimensions') {
       const w = parseFloat(width);
       const h = parseFloat(height);
-      if (isNaN(w) || isNaN(h) || w <= 0 || h <= 0) return;
+      if (!width.trim() || isNaN(w) || w <= 0) nextErrors.width = 'Ingresa un valor válido.';
+      if (!height.trim() || isNaN(h) || h <= 0) nextErrors.height = 'Ingresa un valor válido.';
+      setErrors(nextErrors);
+      if (nextErrors.width || nextErrors.height) return;
       area = w * h;
     } else {
       area = parseFloat(directArea);
-      if (isNaN(area) || area <= 0) return;
+      if (!directArea.trim() || isNaN(area) || area <= 0) {
+        nextErrors.area = 'Ingresa un valor válido.';
+        setErrors(nextErrors);
+        return;
+      }
+      setErrors({});
     }
 
     const total = Math.ceil(area * brick.piecesPerM2);
     setResults({ area, total, brickName: brick.name, piecesPerM2: brick.piecesPerM2 });
+  };
+
+  const clearError = (field: 'width' | 'height' | 'area') => {
+    setErrors((prev) => {
+      if (!prev[field]) return prev;
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
   };
 
   const sendWhatsApp = () => {
@@ -96,7 +124,10 @@ export default function CalculadoraPage() {
                   <div className="flex gap-3">
                     <button
                       type="button"
-                      onClick={() => setInputMode('dimensions')}
+                      onClick={() => {
+                        setInputMode('dimensions');
+                        setErrors({});
+                      }}
                       className={`flex-1 py-2.5 px-4 border-2 text-sm font-display uppercase tracking-widest transition-colors ${
                         inputMode === 'dimensions'
                           ? 'border-primary bg-primary/10 text-primary'
@@ -107,7 +138,10 @@ export default function CalculadoraPage() {
                     </button>
                     <button
                       type="button"
-                      onClick={() => setInputMode('area')}
+                      onClick={() => {
+                        setInputMode('area');
+                        setErrors({});
+                      }}
                       className={`flex-1 py-2.5 px-4 border-2 text-sm font-display uppercase tracking-widest transition-colors ${
                         inputMode === 'area'
                           ? 'border-primary bg-primary/10 text-primary'
@@ -130,9 +164,15 @@ export default function CalculadoraPage() {
                         min="0"
                         placeholder="Ej. 4"
                         value={width}
-                        onChange={(e) => setWidth(e.target.value)}
-                        className={inputClass}
+                        onChange={(e) => {
+                          setWidth(e.target.value);
+                          clearError('width');
+                        }}
+                        className={errors.width ? inputErrorClass : inputClass}
                       />
+                      {errors.width && (
+                        <p className="mt-1.5 text-xs font-medium text-danger">{errors.width}</p>
+                      )}
                     </div>
                     <div>
                       <label className="block text-sm font-semibold text-ink mb-2">Alto (m)</label>
@@ -142,9 +182,15 @@ export default function CalculadoraPage() {
                         min="0"
                         placeholder="Ej. 3"
                         value={height}
-                        onChange={(e) => setHeight(e.target.value)}
-                        className={inputClass}
+                        onChange={(e) => {
+                          setHeight(e.target.value);
+                          clearError('height');
+                        }}
+                        className={errors.height ? inputErrorClass : inputClass}
                       />
+                      {errors.height && (
+                        <p className="mt-1.5 text-xs font-medium text-danger">{errors.height}</p>
+                      )}
                     </div>
                   </div>
                 ) : (
@@ -156,9 +202,15 @@ export default function CalculadoraPage() {
                       min="0"
                       placeholder="Ej. 12"
                       value={directArea}
-                      onChange={(e) => setDirectArea(e.target.value)}
-                      className={inputClass}
+                      onChange={(e) => {
+                        setDirectArea(e.target.value);
+                        clearError('area');
+                      }}
+                      className={errors.area ? inputErrorClass : inputClass}
                     />
+                    {errors.area && (
+                      <p className="mt-1.5 text-xs font-medium text-danger">{errors.area}</p>
+                    )}
                   </div>
                 )}
 
